@@ -1,3 +1,6 @@
+# To adapt this for your data, just change the data file (and define data points according to your file) and change the parameters
+# If you change the parameters, make sure to import the model from the appropriate mcmc_funcs file 
+
 import numpy as np
 from mcmc_funcs_121 import pc_model, log_likelihood, log_prob
 from mcmc import run_sims
@@ -10,12 +13,12 @@ wavelengths = data['wavelength']
 fluxes = data['detrended_flux']/1e6 + 1
 flux_errs = data['detrended_flux_err']/1e6
 
-# Initialize guesses and create labels
+# Initialize parameter guesses and create labels
 init_p = np.array([0.2, 0.0, 0.2, 0.5, 1.0])
 p_labels = [r'$r_p$', r'$\Delta \phi$', '$A_B$','$C_{11}$', 'Unc']
 explore_scale = np.array([0.1, 2.0, 0.2, 0.2, 0.5])
 
 
-for i in range(12, len(wavelengths)):
+for i in range(0, len(wavelengths)):
     bt, gs, fc = run_sims(init_p, explore_scale, pc_model, log_likelihood, log_prob, time, fluxes[i], flux_errs[i],
                           1000, 2000, 1, p_labels, title=wavelengths[i])
