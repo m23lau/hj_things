@@ -1,3 +1,5 @@
+# This file contains the main function that runs MCMC
+
 import corner
 import numpy as np
 import matplotlib.pyplot as plt
@@ -161,25 +163,25 @@ def run_sims(init, explore_scale, model, loglike, logprob, t, f, ferr, n_burn, n
 
     return bt, gs, fc
 
-
+# Uncomment this to test for spitzer data
 # Define data points for spitzer
-with open('Bestfit_Poly5_v1_autoRun.pkl', 'rb') as f:
-    data = pickle.load(f)
-time = data[1]
-flux = data[2] / data[4]
-time, flux = np.delete(time, [1317, 1318, 1420]), np.delete(flux, [1317, 1318, 1420])
-ferr = np.abs(flux * (0.001 * np.random.randn(len(flux))))
+# with open('Bestfit_Poly5_v1_autoRun.pkl', 'rb') as f:
+#     data = pickle.load(f)
+# time = data[1]
+# flux = data[2] / data[4]
+# time, flux = np.delete(time, [1317, 1318, 1420]), np.delete(flux, [1317, 1318, 1420])
+# ferr = np.abs(flux * (0.001 * np.random.randn(len(flux))))
 
 # Initial guess
-# init_p = np.array([57859.318, 1.81, 89.6, 0.108, 4.08, 0.01, 0.01, np.radians(-3), 0.24, 0.30])
-init_p = np.array([np.radians(-3), 0.22, 0.45, 1.0])
-explore = np.array([np.radians(2.0), 0.05, 0.05, 0.1])
+# init_p = np.array([57859.318, 1.81, 89.6, 0.108, 4.08, 0.01, 0.01, np.radians(-3), 0.24, 0.30])   # Model that includes transit time, period, etc. 
+# init_p = np.array([np.radians(-3), 0.22, 0.45, 1.0])                                               
+# explore = np.array([np.radians(2.0), 0.05, 0.05, 0.1])
 # soln = minimize(lambda p, t, f, ferr: -log_prob(p, t, f, ferr), init_p, args=(time, flux, ferr), method="Powell")
 
 # p_labels = [r'$t_0$', 'Per', 'Inc', r'$r_p$', 'a', 'q1', 'q2',
-#             r'$\Delta \phi$', r'$A_B$', r'$C_{11}$']
-p_labels = [r'$\Delta \phi$', r'$A_B$', r'$C_{11}$', 'Unc']
+#             r'$\Delta \phi$', r'$A_B$', r'$C_{11}$']             # Model that includes transit time, period, etc. 
+# p_labels = [r'$\Delta \phi$', r'$A_B$', r'$C_{11}$', 'Unc']      # Model that only has hotspot offset, albedo, c11 and uncertainty
 
-from mcmc_funcs import pc_model, log_prob, log_likelihood   # Uncomment below to test mcmc for Spitzer data
+# from mcmc_funcs import pc_model, log_prob, log_likelihood 
 # bt, gs, fc = run_sims(init_p, explore, pc_model, log_likelihood, log_prob, time, flux, ferr, 10, 100, 1, p_labels, title='69')
 # print(bt)
