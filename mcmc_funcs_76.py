@@ -1,6 +1,7 @@
 # There are two other versions of mcmc_funcs, this one is for JWST data (not yet obtained) on WASP-76b
 # Therefore the params as well as any fixed values are subject to change
 # The MCMC workflow used in these files is similar to the one from https://github.com/bmorris3/kelp/blob/main/notebooks/demo.ipynb
+# Feel free to use this as a template to make a copy and edit pc_model and the other functions to adapt to your own model
 
 import kelp_models
 import numpy as np
