@@ -102,7 +102,7 @@ def phase_offset(time, t0, per, inc, rp, ecc, w, a, q, fp, T_s, rp_a, limb_dark,
 
 
 def kelp_transit(time, t0, per, inc, rp, ecc, w, a, q, fp, T_s, rp_a, limb_dark, name, channel, hotspot_offset, A_B, c11):
-    """ Model phase variation sinusoid using kelp
+    """ Model full orbit phase curve using kelp
     Args:
         time (ndarray): Number of times to calculate the model
         t0 (float): Transit time
